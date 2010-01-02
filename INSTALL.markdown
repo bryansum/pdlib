@@ -3,8 +3,8 @@ projects, I've created a shell script which kicks off the requisite Xcode builds
 and creates a fat binary. This takes in a prefix argument. In short, to install 
 pdlib to `$YOUR_PREFIX`:
   
-  cd PdLib
-  ./install.sh $YOUR_PREFIX
+    cd PdLib
+    ./install.sh $YOUR_PREFIX
 
 Then make sure to add both `$YOUR_PREFIX/include` to your project's Header Search 
 Path as well as `$YOUR_PREFIX/lib` to the Library Search Path in addition to adding
@@ -17,6 +17,6 @@ a `build_for_iphone` script written by [Christopher Stawarz](http://pseudogreen.
 PdLibTest is already preconfigured to search for the `/usr/local` header and library paths 
 (`/include` and `/lib`, respectively). To install liblo for iPhone:
 
-  cd liblo-0.26
-  sudo ./quickinstall.sh 
+    cd liblo-0.26
+    sudo ./quickinstall.sh 
 
