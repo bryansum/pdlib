@@ -1,6 +1,5 @@
 /*
  AudioOutput.c
- PdLibm v0.3
  
  Copyright 2010 Bryan Summersett. All rights reserved.
  

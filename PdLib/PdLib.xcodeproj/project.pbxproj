@@ -292,8 +292,8 @@
 		08FB7795FE84155DC02AAC07 /* PdLib */ = {
 			isa = PBXGroup;
 			children = (
+				2350CC8510BA11CD002AEC75 /* AudioOutput.h */,
 				2350CC8610BA11CD002AEC75 /* PdController.h */,
-				2350CC8710BA11CD002AEC75 /* PdController.m */,
 				23AD764110D0984F0089F885 /* mrpeach */,
 				2350CC8310BA1198002AEC75 /* bryansum */,
 				232765D510B8C03400EB6E47 /* pd-src */,
@@ -391,9 +391,9 @@
 		2350CC8310BA1198002AEC75 /* bryansum */ = {
 			isa = PBXGroup;
 			children = (
+				2350CC8710BA11CD002AEC75 /* PdController.m */,
 				2350CC8D10BA1294002AEC75 /* s_main.h */,
 				2350CC8410BA11CD002AEC75 /* AudioOutput.c */,
-				2350CC8510BA11CD002AEC75 /* AudioOutput.h */,
 			);
 			name = bryansum;
 			sourceTree = "<group>";
