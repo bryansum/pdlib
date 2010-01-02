@@ -1,6 +1,6 @@
 /*
  PdController.m
- PdLib
+ PdLib v0.3
  
  Copyright 2010 Bryan Summersett. All rights reserved.
  
