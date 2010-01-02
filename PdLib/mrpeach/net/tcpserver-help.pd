@@ -1,0 +1,181 @@
+#N canvas 284 35 1256 779 12;
+#X msg 143 -36 print;
+#X floatatom 448 290 5 0 0 0 - - -;
+#X floatatom 472 340 5 0 0 0 - - -;
+#X obj 496 291 unpack 0 0 0 0;
+#X floatatom 496 314 3 0 0 0 - - -;
+#X floatatom 527 314 3 0 0 0 - - -;
+#X floatatom 559 314 3 0 0 0 - - -;
+#X floatatom 593 314 3 0 0 0 - - -;
+#X text 453 313 from;
+#X text 364 290 connections;
+#X obj 425 415 print received;
+#X msg 239 60 client 1 1 2 3;
+#X msg 167 -12 broadcast 1 2 3;
+#X text 195 -35 list of connections;
+#X text 290 -12 send to all clients;
+#X text 402 340 on socket;
+#X msg 93 -86 send 504 1 2 3;
+#X text 204 -91 send to client on socket 504;
+#X msg 777 -209 client 1 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17
+18 19;
+#X msg 777 -186 client 1 20 21 22 23 24 25 26 27 28 29 30 31 32 33
+34 35 36 37 38 39;
+#X msg 777 -148 client 1 40 41 42 43 44 45 46 47 48 49 50 51 52 53
+54 55 56 57 58 59;
+#X msg 777 -110 client 1 60 61 62 63 64 65 66 67 68 69 70 71 72 73
+74 75 76 77 78 79;
+#X msg 777 -72 client 1 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94
+95 96 97 98 99;
+#X msg 777 -34 client 1 100 101 102 103 104 105 106 107 108 109 110
+111 112 113 114 115 116 117 118 119;
+#X msg 777 4 client 1 120 121 122 123 124 125 126 127 138 139 140 141
+142 143 144 145 146 147 148 149;
+#X msg 777 42 client 1 150 151 152 153 154 155 156 157 158 159 160
+161 162 163 164 165 166 167 168 169;
+#X msg 777 80 client 1 170 171 172 173 174 175 176 177 178 179 180
+181 182 183 184 185 186 187 188 189;
+#X msg 777 118 client 1 190 191 192 193 194 195 196 197 198 199 200
+201 202 203 204 205 206 207 208 209;
+#X msg 777 156 client 1 210 211 212 213 214 215 216 217 218 219 220
+221 222 223 224 225 226 227 228 229;
+#X msg 777 194 client 1 230 231 232 233 234 235 236 237 238 239 240
+241 242 243 244 245 246 247 248 249;
+#X msg 777 232 client 1 250 251 252 253 254 255;
+#X obj 144 -203 openpanel;
+#X obj 144 -222 bng 15 250 50 0 empty empty choose_a_file 17 7 0 10
+-24198 -241291 -1;
+#X text 128 -183 ...any file;
+#X msg -4 -183 client 1 \$1;
+#X msg 118 -61 10 1 2 43;
+#X text 202 -74 'send' prefix is optional;
+#X text 192 -57 (the first number is socket number);
+#X msg 63 -116 disconnectsocket \$1;
+#X msg 20 -159 disconnectclient \$1;
+#X obj 777 257 s toserver;
+#X obj 425 238 r toserver;
+#X floatatom 247 -198 5 0 0 0 - - -;
+#X obj 225 -179 f;
+#X obj 225 -198 bng 15 250 50 0 empty empty empty 17 7 0 10 -258699
+-241291 -1;
+#X floatatom 289 -155 5 0 0 0 - - -;
+#X obj 267 -136 f;
+#X obj 267 -155 bng 15 250 50 0 empty empty empty 17 7 0 10 -258699
+-241291 -1;
+#X text -5 -136 disconnect by socket or client number;
+#X text 532 265 argument is port number;
+#X text 96 267 Received messages are output as lists of bytes;
+#X text 35 371 ***WARNING*** Attempting to print long messages can
+hang pd!;
+#X obj 425 393 spigot;
+#X obj 464 373 tgl 15 0 empty empty enable_print 17 7 0 10 -24198 -258699
+-45076 0 1;
+#X msg 263 84 dump \$1;
+#X obj 87 69 tgl 15 0 empty empty enable_dump 17 7 0 10 -4034 -257985
+-1 0 1;
+#X text 19 19 dump received;
+#X text 19 35 characters to main;
+#X text 19 50 window in hexdump;
+#X text 19 66 format:;
+#X obj 425 266 tcpserver 9997;
+#X msg -28 -207 client 1 test.txt;
+#X text 777 -234 [tcpserver] sends and receives bytes on [0...255]
+;
+#X text 262 -243 [tcpserver] waits for clients to connect to its port.
+;
+#X text -33 -228 send a file to client 1;
+#X msg 287 108 client 1 72 101 108 108 111 13 10;
+#X floatatom 682 351 9 0 0 0 - - -;
+#X obj 758 313 print status;
+#X floatatom 642 374 5 0 0 0 - - -;
+#X text 572 373 to_client;
+#X msg 215 36 client;
+#X msg 192 13 client 1;
+#X text 260 12 get state of client 1;
+#X text 353 60 send (binary) 1 2 3 to client 1;
+#X obj 642 286 route sent client;
+#X floatatom 817 443 5 0 0 0 - - -;
+#X symbolatom 849 416 20 0 0 0 - - -;
+#X floatatom 786 416 5 0 0 0 - - -;
+#X text 749 350 bytes;
+#X text 642 350 sent;
+#X msg 313 134 clientbuf 1 65536;
+#X obj 786 392 unpack 0 0 s 0;
+#X floatatom 881 464 7 0 0 0 - - -;
+#X text 726 464 length of send buffer:;
+#X text 766 442 socket:;
+#X text 735 415 client:;
+#X text 826 415 ip:;
+#X text 443 133 set send-buffer size for client 1;
+#X text 267 36 get state of all clients (list on right outlet);
+#X obj 642 325 unpack 0 0 0;
+#X floatatom 723 392 5 0 0 0 - - -;
+#X text 653 391 on_socket;
+#X msg 363 184 send;
+#X msg 388 209 1156;
+#X text 406 183 output 'client' message for all sockets;
+#X text 428 209 output 'client' message for socket 1156;
+#X msg 338 159 timeout 100;
+#X text 425 159 microsecond timeout for send (default is 1000);
+#X text 35 450 2009/04/08 Martin Peach;
+#X connect 0 0 60 0;
+#X connect 3 0 4 0;
+#X connect 3 1 5 0;
+#X connect 3 2 6 0;
+#X connect 3 3 7 0;
+#X connect 11 0 60 0;
+#X connect 12 0 60 0;
+#X connect 16 0 60 0;
+#X connect 18 0 40 0;
+#X connect 19 0 40 0;
+#X connect 20 0 40 0;
+#X connect 21 0 40 0;
+#X connect 22 0 40 0;
+#X connect 23 0 40 0;
+#X connect 24 0 40 0;
+#X connect 25 0 40 0;
+#X connect 26 0 40 0;
+#X connect 27 0 40 0;
+#X connect 28 0 40 0;
+#X connect 29 0 40 0;
+#X connect 30 0 40 0;
+#X connect 31 0 34 0;
+#X connect 32 0 31 0;
+#X connect 34 0 60 0;
+#X connect 35 0 60 0;
+#X connect 38 0 60 0;
+#X connect 39 0 60 0;
+#X connect 41 0 60 0;
+#X connect 42 0 43 1;
+#X connect 43 0 39 0;
+#X connect 44 0 43 0;
+#X connect 45 0 46 1;
+#X connect 46 0 38 0;
+#X connect 47 0 46 0;
+#X connect 52 0 10 0;
+#X connect 53 0 52 1;
+#X connect 54 0 60 0;
+#X connect 55 0 54 0;
+#X connect 60 0 52 0;
+#X connect 60 1 1 0;
+#X connect 60 2 2 0;
+#X connect 60 3 3 0;
+#X connect 60 4 74 0;
+#X connect 61 0 60 0;
+#X connect 65 0 60 0;
+#X connect 70 0 60 0;
+#X connect 71 0 60 0;
+#X connect 74 0 89 0;
+#X connect 74 1 81 0;
+#X connect 74 2 67 0;
+#X connect 80 0 60 0;
+#X connect 81 0 77 0;
+#X connect 81 1 75 0;
+#X connect 81 2 76 0;
+#X connect 81 3 82 0;
+#X connect 89 0 68 0;
+#X connect 89 1 66 0;
+#X connect 89 2 90 0;
+#X connect 92 0 60 0;
+#X connect 93 0 60 0;
+#X connect 96 0 60 0;
