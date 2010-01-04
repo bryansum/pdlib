@@ -1,15 +1,15 @@
 pdlib
 ===========
 
-The idea for pdblib came from the [iJam](/projects/ijam) project,
-which needed an audio back end. After looking around for existing solutions,
+The need for pdlib came from the development of [iJam](/projects/ijam),
+which needed an audio back end. After looking for existing solutions,
 few synthesizers were free to use in commercial projects, 
-and those that were were typically limited in the sounds they could produce. 
+and those that available were typically limited in the sounds they could produce. 
 I was familiar with [Rjdj](http://rjdj.me)
 and their decision to use [Pure Data](http://crca.ucsd.edu/~msp/software.html) 
 as their audio synthesizer, but they hadn't opted to release their port.
 
-One of the goals of pdlib was to minimize changes to the vanilla Pure Data;
+One of the goals of pdlib was to minimize changes to vanilla Pure Data;
 as such, only the command-line parsing and the audio hardware interface
 have been rewritten. It is based on Pure Data v0.42-5.  
 
@@ -32,7 +32,8 @@ iJam is use Martin Peach's `osc` patches, specifically `routeosc`, along with hi
 `udpreceive` patch to receive audio events from the Objective-C code on a specific port.
 Then we use [liblo](http://liblo.sourceforge.net/) to send OSC messages so 
 communication is all socket-based. This was done in part because Pure Data is 
-*not* thread-safe, and as such the library runs as a singleton. PdLibTest, included
+*not* thread-safe. Because only one instance of PD can run in a single process,
+the PdController library runs as a singleton. PdLibTest, included
 in the release, shows how pdlib can be used in an Xcode project.
 
 Installation
@@ -40,7 +41,8 @@ Installation
 
 To build and install pdlib as a static library for linking into other iPhone 
 projects, I've created a shell script which kicks off the requisite Xcode builds
-and creates a fat binary. This takes in a prefix argument. In short, to install 
+and creates a fat binary. This has been tested on OS X 10.6, but should work on 10.5 
+as well. This takes in a prefix argument. In short, to install 
 pdlib to `$YOUR_PREFIX`:
   
     cd PdLib
@@ -71,23 +73,25 @@ The properties include:
 
 - `soundRate`: the frequency of Pure Data in Hz. Defaults to 22050
 - `blockSize`: How many samples to generate for each DSP tick. Smaller blocks sizes
-  mean greater latency, but is less processor intensive. I've defaulted to 256,
+  mean smaller latency, but is more processor intensive. I've defaulted to 256,
   while vanilla Pure Data is set to 64. Because of this, this value needs to be
   a multiple of 64.
 - `nOutChannels`: 1 or 2. How many channels we want to support. Set to 2 for now.
   Changing to mono has not been tested, but *should* work.
-- `callbackFn`: the function that is to be called on every DSP tick. This is 
+- `callbackFn`: Optional; a function that is to be called on every DSP tick. This is 
   often useful as a timer mechanism for UI events, etc. The callback function 
-  should be processed quickly, as this is running on CoreAudio's real-time 
-  thread. I typically use it to call GUI events asynchronously, etc.
-- `externs`: an NSArray of NSStrings. Each should be a valid path to externs
+  should run quickly, as this runs on CoreAudio's callback thread and needs to finish
+  before the next DSP cycle. In other words, try to minimize system calls, etc. 
+  I typically use it to call GUI events asynchronously, etc. with 
+  `performSelectorOnMainThread:`.
+- `externs`: an `NSArray` of `NSString`s. Each should be a valid path to externs
   that should be loaded into the system at start-up.
-- `openfiles`: an NSArray of NSStrings that specify which files should be opened
+- `openfiles`: an `NSArray` of `NSString`s that specify which files should be opened
   as PD starts up.
-- `liddir`: an NSString that specifies the directory where the .pd files are located.
+- `liddir`: an `NSString` that specifies the directory where the .pd files are located.
   This is recursive. 
   
-See PdListTest for a working example.
+See PdListTest for a working example of PdController. 
 
 Future improvements
 ---------------------
