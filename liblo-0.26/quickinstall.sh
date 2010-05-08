@@ -13,4 +13,4 @@ $CUR_DIR/build_for_iphone -p "$SIM_DIR" simulator
 
 lipo -output /usr/local/lib/liblo-iphone.a -create $DEVICE_DIR/lib/liblo.a $SIM_DIR/lib/liblo.a
 
-cp -r $DEVICE_DIR/include/ /usr/local
+cp -r $DEVICE_DIR/include/ /usr/local/include
