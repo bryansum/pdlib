@@ -78,6 +78,8 @@ The properties include:
   a multiple of 64.
 - `nOutChannels`: 1 or 2. How many channels we want to support. Set to 2 for now.
   Changing to mono has not been tested, but *should* work.
+- `nInChannels`: 1 or 2. How many channels we want to support. Set to 2 for now.
+  Changing to mono has not been tested, but *should* work.
 - `callbackFn`: Optional; a function that is to be called on every DSP tick. This is 
   often useful as a timer mechanism for UI events, etc. The callback function 
   should run quickly, as this runs on CoreAudio's callback thread and needs to finish
@@ -97,7 +99,6 @@ Future improvements
 ---------------------
 
 - Add a mechanism to directly send messages to Pd via PdController
-- Add support for microphone input (ADC~) 
 - Add test cases
 - Verify that `openFile:` is working correctly
 
