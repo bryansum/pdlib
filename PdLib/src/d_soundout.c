@@ -60,10 +60,10 @@ static void soundout_setup(void)
         (t_method)soundout_free, sizeof(t_soundout), CLASS_DEFAULT, 0);
     CLASS_MAINSIGNALIN(soundout_class, t_soundout, x_f);
     class_addmethod(soundout_class, (t_method)soundout_dsp, gensym("dsp"), A_CANT, 0);
-    //class_sethelpsymbol(soundout_class, gensym("adc~_soundout~"));
+    class_sethelpsymbol(soundout_class, gensym("adc~_soundout~"));
 }
 
-///* ----------------------------- adc~ --------------------------- */
+/* ----------------------------- adc~ --------------------------- */
 //static t_class *adc_class;
 //
 //typedef struct _adc
@@ -147,12 +147,12 @@ static void soundout_setup(void)
 //    for (i = x->x_n, ip = x->x_vec, sp2 = sp; i--; ip++, sp2++)
 //    {
 //        int ch = *ip - 1;
-////        if ((*sp2)->s_n != DEFDACBLKSIZE)
-////            error("adc~: bad vector size");
-////        else if (ch >= 0 && ch < sys_get_inchannels())
-////            dsp_add_copy(sys_soundin + DEFDACBLKSIZE*ch,
-////                (*sp2)->s_vec, DEFDACBLKSIZE);
-////        else dsp_add_zero((*sp2)->s_vec, DEFDACBLKSIZE);
+//        if ((*sp2)->s_n != sys_schedblocksize)
+//            error("adc~: bad vector size");
+//        else if (ch >= 0 && ch < sys_ninchannels)
+//            dsp_add_copy(sys_soundin + sys_schedblocksize*ch,
+//                (*sp2)->s_vec, sys_schedblocksize);
+//        else dsp_add_zero((*sp2)->s_vec, sys_schedblocksize);
 //    }    
 //}
 //

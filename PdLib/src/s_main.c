@@ -56,6 +56,7 @@ int sys_oldtclversion;      /* hack to warn g_rtext.c about old text sel */
 int sys_dacsr = 22050;
 int sys_schedblocksize = 256; // block size
 int sys_noutchannels = 2;
+int sys_ninchannels = 2;
 AudioCallbackFn sys_userCallbackFn = NULL;
 
 extern void sched_audio_callbackfn(void);
@@ -71,10 +72,12 @@ void audioOutputCallbackFn(const AudioTimeStamp *inTimestamp) {
 
 AudioCallbackParams sys_callbackparams = {
     &audioOutputCallbackFn,
-    NULL
+    NULL,
+    0
 };
 
 t_sample *sys_soundout; // global var for samples
+t_sample *sys_soundin;
 
 int sys_printtostderr;
 int sys_hasstarted = 0;
@@ -284,6 +287,7 @@ int sys_main(const char *libdir,
              int soundRate,
              int blockSize,
              int nOutChannels,
+             int nInChannels,
              AudioCallbackFn callback)
 {
     sys_userCallbackFn = callback;
@@ -294,9 +298,13 @@ int sys_main(const char *libdir,
     sys_soundout = malloc(sizeof(t_sample) * sys_schedblocksize * sys_noutchannels);
     memset(sys_soundout, 0, sizeof(t_sample) * sys_schedblocksize * sys_noutchannels);
 
+    sys_soundin = malloc(sizeof(t_sample) * sys_schedblocksize * sys_ninchannels);
+    memset(sys_soundin, 0, sizeof(t_sample) * sys_schedblocksize * sys_ninchannels);
+
     sys_dacsr = soundRate;
     sys_schedblocksize = blockSize;
     sys_noutchannels = nOutChannels;
+    sys_ninchannels = nInChannels;
     
     // pure data defaults
     
@@ -326,7 +334,7 @@ int sys_main(const char *libdir,
     }
     
     // bryansum
-    // Run the either m_pollingscheduler, which actually computers ticks,
+    // Run the either m_pollingscheduler, which actually computes ticks,
     // or m_callbackscheduler, which waits for the hardware to callback for DSP ticks.
     // CoreAudio on the iPhone uses the callback mechanism. 
     sched_set_using_audio(SCHED_AUDIO_CALLBACK);

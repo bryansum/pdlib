@@ -48,6 +48,7 @@
     NSInteger       blockSize; // essentially, how many samples to run per DSP tick. Defaults to 256.
                                // Must be a multiple of 64 (Pure Data's default)
     NSInteger       nOutChannels; // 1 or 2: If we want mono or stereo out.
+    NSInteger       nInChannels; // 1 or 2: mono / stereo mic
     AudioCallbackFn callbackFn; // Function to call back for every DSP tick. Called BEFORE DSP rendering
 }
 
@@ -63,5 +64,6 @@
 @property (nonatomic, assign) NSInteger soundRate;
 @property (nonatomic, assign) NSInteger blockSize;
 @property (nonatomic, assign) NSInteger nOutChannels;
+@property (nonatomic, assign) NSInteger nInChannels;
 @property (nonatomic, assign) AudioCallbackFn callbackFn;
 @end

@@ -216,7 +216,9 @@ void sys_save_audio_params(
 /* old s_audio.c globals */
 extern int sys_dacsr;
 extern int sys_noutchannels;
+extern int sys_ninchannels;
 extern t_sample *sys_soundout;
+extern t_sample *sys_soundin;
 extern int sys_schedblocksize;
 extern int sys_schedadvance;
 extern int sys_hipriority;

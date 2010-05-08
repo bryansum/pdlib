@@ -42,6 +42,7 @@ typedef void (*AudioCallbackFn)(const AudioTimeStamp *timestamp);
 typedef struct AudioCallbackParams {
     AudioCallbackFn     callback;
     AudioUnit           audioUnit;
+    UInt32              isMicAvailable;
 } AudioCallbackParams;
 
 OSStatus AudioOutputInitialize(AudioCallbackParams *params);

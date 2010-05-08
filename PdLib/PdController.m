@@ -35,13 +35,13 @@
 
 static const NSInteger kDefaultSoundRate = 22050;
 static const NSInteger kDefaultBlockSize = 256;
-static const NSInteger kDefaultNOutChannels = 2;
+static const NSInteger kDefaultNChannels = 2;
 
 static PdController *sharedSingleton = nil;
 
 @implementation PdController
 
-@synthesize externs, openfiles, libdir, soundRate, blockSize, nOutChannels, callbackFn;
+@synthesize externs, openfiles, libdir, soundRate, blockSize, nOutChannels, nInChannels, callbackFn;
 
 + (PdController*)sharedController
 {
@@ -105,8 +105,8 @@ static PdController *sharedSingleton = nil;
         NSLog(@"PdLib: libdir must be specified");
         return;
     }
-    if (!soundRate || !blockSize || !(blockSize % 64 == 0) || !nOutChannels) {
-        NSLog(@"pd audio settings (soundRate, blockSize, nOutChannels) must be specified. \
+    if (!soundRate || !blockSize || !(blockSize % 64 == 0) || !nOutChannels || !nInChannels) {
+        NSLog(@"pd audio settings (soundRate, blockSize, nOutChannels, nInChannels) must be specified. \
               Additionally, blockSize must be a multiple of 64");
     }
     
@@ -118,6 +118,7 @@ static PdController *sharedSingleton = nil;
              soundRate,
              blockSize,
              nOutChannels,
+             nInChannels,
              callbackFn);
     
     [pool drain];
@@ -167,7 +168,8 @@ static PdController *sharedSingleton = nil;
         libdir = NULL;
         soundRate = kDefaultSoundRate;
         blockSize = kDefaultBlockSize;
-        nOutChannels = kDefaultNOutChannels;
+        nOutChannels = kDefaultNChannels;
+        nInChannels = kDefaultNChannels;
         callbackFn = NULL;
     }
     
