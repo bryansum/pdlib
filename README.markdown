@@ -1,7 +1,7 @@
 pdlib
 ===========
 
-The need for pdlib came from the development of [iJam](/projects/ijam),
+The need for pdlib came from the development of [iJam](http://bsumm.net/ijam.html),
 which needed an audio back end. After looking for existing solutions,
 few synthesizers were free to use in commercial projects, 
 and those that available were typically limited in the sounds they could produce. 
